@@ -1,0 +1,48 @@
+name: jenkins4nix
+version: 0.2.0
+synopsis: Writes Nix expressions for Jenkins plugins
+description:
+  Parses https://updates.jenkins-ci.org/download/plugins
+  searches for requested plugins and their dependencies.
+  Writes Nix expression to stdout:
+    {
+      "plugin-name" = {
+        version = "1.2.3";
+        sha1 = "...";
+        depends = [ ... ];
+      };
+      ...
+    }
+license: MIT
+license-file: LICENSE
+author: Igor Pashev
+maintainer: Igor Pashev <pashev.igor@gmail.com>
+copyright: 2015, Zalora South East Asia Pte. Ltd
+category: NixOS
+build-type: Simple
+extra-source-files:
+    README.md
+cabal-version: >=1.10
+
+source-repository head
+  type: git
+  location: https://github.com/zalora/jenkins4nix.git
+
+executable jenkins4nix
+    default-language: Haskell2010
+    ghc-options: -static -threaded -Wall
+    hs-source-dirs: src
+    main-is: Main.hs
+    other-modules:
+    build-depends:
+        base >=4.6,
+        base16-bytestring,
+        bytestring,
+        containers,
+        cryptohash,
+        curl,
+        download-curl,
+        hxt,
+        regex-applicative,
+        zip-archive
+
